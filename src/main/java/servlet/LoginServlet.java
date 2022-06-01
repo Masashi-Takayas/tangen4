@@ -51,28 +51,33 @@ public class LoginServlet extends HttpServlet {
 		String o = "product_id";
 		UserDao userDao;
 		ProductDao productDao;
-		
+		Boolean check = false;
 		Connection connection;
 
-		
 		connection = DbUtil.getConnection();
 		//		connection.setAutoCommit(false);
 
 		userDao = new UserDao(connection);
 		productDao = new ProductDao(connection);
-		
+
 		List<User> list = userDao.findAll();
 		List<Product> list2 = productDao.findAll(o);
 		HttpSession session = request.getSession(false);
-		
-		
+
 		if(loginId != null && !loginId.isEmpty()&&pass != null && !pass.isEmpty()){
 			session.setAttribute("list", list2);
-			
-			for(User i:list) {
 
+			for(User i:list) {
 				if(i.getLogin_id().equals(loginId) && i.getPassword().equals(pass)) {
 					session.setAttribute("name", i.getName());
+
+					if(i.getRole() == 1) {
+						check = true;
+						}
+					else {
+						check = false;
+					}
+					session.setAttribute("check", check);
 					
 					request.getRequestDispatcher("menu.jsp").forward(request, response);						
 				}

@@ -45,8 +45,8 @@
 							value="${findId.p_name}" readonly class="base-text">
 					</div>
 					<div>
-						<label>単価</label> <input type="text" name="tel" value="${findId.price}"
-							readonly class="base-text">
+						<label>単価</label> <input type="text" name="tel"
+							value="${findId.price}" readonly class="base-text">
 					</div>
 					<div>
 						<label>カテゴリ</label> <input type="text" name="roleName"
@@ -61,14 +61,20 @@ ${findId.description}
 					</div>
 				</fieldset>
 				<div>
-					<div class="btns">
-						<input type="button" onclick="openModal()" value="削除"
-							class="basic_btn"> <input type="button"
-							onclick="location.href='Update'" value="編集"
-							class="basic_btn"> <input type="button"
-							onclick="location.href='./menu.jsp'" value="戻る"
-							class="cancel_btn">
-					</div>
+					<c:choose>
+						<c:when test="${check == true}">
+							<div class="btns">
+								<input type="button" onclick="openModal()" value="${delete}"
+									class="basic_btn"> <input type="button"
+									onclick="location.href='Update'" value="${update}"
+									class="basic_btn">
+							</div>
+						</c:when>
+					</c:choose>
+					<input type="button" onclick="location.href='./menu.jsp'"
+						value="戻る" class="cancel_btn">
+
+
 					<div id="modal">
 						<p class="modal_message">削除しますか？</p>
 						<div class="btns">

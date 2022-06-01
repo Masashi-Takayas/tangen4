@@ -36,17 +36,17 @@ public class DeleteServlet extends HttpServlet {
 		//	response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession(false);
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String o = "product_id";
 		String loginId = request.getParameter("loginId");
 		ProductDao productDao;
 		Connection connection;
 		connection = DbUtil.getConnection();
 		productDao = new ProductDao(connection);
-		List<Product> list2 = productDao.findAll(o);
-		
+
 		try {
 			productDao.delete(loginId);
+			List<Product> list2 = productDao.findAll(o);
 			session.setAttribute("list", list2);
 			request.setAttribute("insert","削除が完了しました");
 			request.getRequestDispatcher("menu.jsp").forward(request, response);

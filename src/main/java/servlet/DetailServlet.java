@@ -44,7 +44,6 @@ public class DetailServlet extends HttpServlet {
 
 		Product findId = productDao.findById(product_id);
 		
-		
 		session.setAttribute("findId", findId);
 		request.getRequestDispatcher("detail.jsp").forward(request, response);
 	}

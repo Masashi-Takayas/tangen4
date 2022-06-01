@@ -31,10 +31,13 @@
 		</div>
 
 		<hr>
-
-		<div class="btn">
-			<a class="basic_btn regist" href="insert.jsp">新規登録</a>
-		</div>
+		<c:choose>
+			<c:when test="${check == true}">
+				<div class="btn">
+					<a class="basic_btn regist" href="insert.jsp">新規登録</a>
+				</div>
+			</c:when>
+		</c:choose>
 		<p>${insert}</p>
 		<form method="get" action="Search" class="search_container">
 			<input type="text" size="25" name="keyWord" placeholder="キーワード検索">
@@ -48,7 +51,8 @@
 
 			<div class="order">
 				<form method="get" action="Search">
-					<select class="base-text" name="orderBy"onchange="this.form.submit()">
+					<select class="base-text" name="orderBy"
+						onchange="this.form.submit()">
 						<option selected>並び替え</option>
 						<option value="product_id">商品ID</option>
 						<option value="category_id">カテゴリ</option>
@@ -76,7 +80,8 @@
 						<td>${p.p_name}</td>
 						<td>${p.price}</td>
 						<td>${p.category.c_name}</td>
-						<td><a class="detail_btn" href="Detail?product_id=${p.product_id}">詳細</a></td>
+						<td><a class="detail_btn"
+							href="Detail?product_id=${p.product_id}">詳細</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
